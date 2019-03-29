@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventuresUnknownEditor", "AdventuresUnknownEditor.csproj", "{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AdventuresUnknownRuntime|Any CPU = AdventuresUnknownRuntime|Any CPU
+		AdventuresUnknownSDK|Any CPU = AdventuresUnknownSDK|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.AdventuresUnknownRuntime|Any CPU.ActiveCfg = AdventuresUnknownRuntime|Any CPU
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.AdventuresUnknownRuntime|Any CPU.Build.0 = AdventuresUnknownRuntime|Any CPU
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.AdventuresUnknownSDK|Any CPU.ActiveCfg = AdventuresUnknownSDK|Any CPU
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.AdventuresUnknownSDK|Any CPU.Build.0 = AdventuresUnknownSDK|Any CPU
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF4DC79-ECBA-4DD4-B5CD-0FC405E85B4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF1D4372-3CBA-47B4-BBEE-9D684A1B2926}
+	EndGlobalSection
+EndGlobal
