@@ -16,7 +16,22 @@ namespace AdventuresUnknownSDK.Core.Utils
         {
             if (fieldInfo == null) return null;
             if (prop == null) return null;
-            return fieldInfo.GetValue(GetParent(prop));
+            object obj =  fieldInfo.GetValue(GetParent(prop));
+            IEnumerable enumerable = obj as IEnumerable;
+            if (enumerable != null)
+            {
+                int index = 0;
+                int.TryParse(prop.propertyPath.Last((c) => c != ']').ToString(), out index);
+                foreach (var enumObj in enumerable)
+                {
+                    if (index == 0)
+                    {
+                        return enumObj;
+                    }
+                    index--;
+                }
+            }
+            return obj;
         }
         public static object GetParent(SerializedProperty prop)
         {

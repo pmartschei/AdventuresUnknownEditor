@@ -39,7 +39,7 @@ namespace AdventuresUnknownSDK.Editor.Drawers
 
             EditorGUI.BeginChangeCheck();
 
-            property.serializedObject.Update();
+            //property.serializedObject.Update();
 
             SerializedProperty spIdentifier = property.FindPropertyRelative("m_Identifier");
 
@@ -49,16 +49,24 @@ namespace AdventuresUnknownSDK.Editor.Drawers
             buttonRect.yMin += popupStyle.margin.top;
             buttonRect.width = popupStyle.fixedHeight + popupStyle.margin.right;
             position.xMin = buttonRect.xMax + popupStyle.margin.right;
-
+            property.serializedObject.ApplyModifiedProperties();
             object obj = ObjectFinder.FindObject(this.fieldInfo, property);
-            ObjectIdentifier[] test = obj as ObjectIdentifier[];
+            IEnumerable enumerable = obj as IEnumerable;
             ObjectIdentifier objectIdentifier = obj as ObjectIdentifier;
 
-            if (objectIdentifier == null)
+            if (enumerable != null)
             {
-
-                int index = int.Parse(property.propertyPath.Last((c) => c != ']').ToString());
-                objectIdentifier = test[index];
+                int index = 0;
+                int.TryParse(property.propertyPath.Last((c) => c != ']').ToString(), out index);
+                foreach (var enumObj in enumerable)
+                {
+                    if (index == 0)
+                    {
+                        objectIdentifier = enumObj as ObjectIdentifier;
+                        break;
+                    }
+                    index--;
+                }
             }
 
             //ObjectIdentifier objectIdentifier = GetValue(GetParent(property), property.name) as ObjectIdentifier;
@@ -67,6 +75,11 @@ namespace AdventuresUnknownSDK.Editor.Drawers
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
+            //if (Event.current.commandName.Equals("ObjectSelectorUpdated"))
+            //{
+            //    UnityEngine.Object g = EditorGUIUtility.GetObjectPickerObject();
+            //    Debug.Log(g);
+            //}
 
             if (objectIdentifier != null)
             {
@@ -87,6 +100,7 @@ namespace AdventuresUnknownSDK.Editor.Drawers
                         }
                     }
                 }
+                coreObjects.Sort((first, second) => { return first.Identifier.CompareTo(second.Identifier); });
                 string[] names = new string[coreObjects.Count];
                 GenericMenu gm = new GenericMenu();
                 for (int i = 0; i < coreObjects.Count; i++)
@@ -100,8 +114,34 @@ namespace AdventuresUnknownSDK.Editor.Drawers
                 if (GUI.Button(buttonRect, GUIContent.none, popupStyle))
                 {
                     gm.DropDown(buttonRect);
+                    
+                    //EditorGUIUtility.ShowObjectPicker<CoreObject>(null, false, "", 0);
                 }
                 //spIdentifier.stringValue = EditorGUI.TextField(position, spIdentifier.stringValue);
+
+                Event evt = Event.current; switch (evt.type)
+                {
+                    case EventType.DragUpdated:
+                    case EventType.DragPerform:
+                        if (!position.Contains(evt.mousePosition))
+                            return;
+
+                        if (DragAndDrop.objectReferences.Length != 1) return;
+                        CoreObject coreObject = DragAndDrop.objectReferences[0] as CoreObject;
+                        if (!coreObject) return;
+
+                        DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+
+                        if (evt.type == EventType.DragPerform)
+                        {
+                            DragAndDrop.AcceptDrag();
+
+                            spIdentifier.stringValue = coreObject.Identifier;
+                            spIdentifier.serializedObject.ApplyModifiedProperties();
+                            property.serializedObject.ApplyModifiedProperties();
+                        }
+                        break;
+                }
                 EditorGUI.PropertyField(position, spIdentifier, GUIContent.none);
             }
             if (EditorGUI.EndChangeCheck())

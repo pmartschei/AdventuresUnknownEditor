@@ -76,18 +76,35 @@
     </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Unity2018\Editor\Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Unity2018\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Unity2018\Editor\Data\Managed\UnityEngine\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\Program Files\Unity2018\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Unity2018\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\..\..\..\..\Program Files\Unity2018\Editor\Data\Managed\UnityEngine\UnityEngine.UIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Entities\ActiveStatsDrawer.cs" />
+    <Compile Include="Core\Entities\EntityDrawer.cs" />
+    <Compile Include="Core\Entities\WalletEditor.cs" />
     <Compile Include="Core\Objects\Events\GameEventEditor.cs" />
     <Compile Include="Core\Utils\LoadCoreObjects.cs" />
     <Compile Include="Core\Utils\ObjectFinder.cs" />
     <Compile Include="Editor\Drawers\IdentifiersDrawer.cs" />
     <Compile Include="Editor\Drawers\LocalizationStringDrawer.cs" />
+    <Compile Include="Editor\Drawers\LayerDrawer.cs" />
     <Compile Include="Editor\Drawers\LowerCaseOnlyDrawer.cs" />
     <Compile Include="Editor\Drawers\ReduceHierarchyDrawer.cs" />
+    <Compile Include="Core\Objects\Mods\AttributesObjectEditor.cs" />
     <Compile Include="Editor\Editors\LocalizationTableEditor.cs" />
     <Compile Include="Core\Objects\CoreObjectEditor.cs" />
     <Compile Include="Editor\Editors\DropTableEditor.cs" />
@@ -101,9 +118,12 @@
       <Name>AdventuresUnknownRuntime</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\UI\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)Assets\Plugins\$(ProjectName).dll
-copy /y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Assets\Plugins\$(ProjectName).pdb</PostBuildEvent>
+    <PostBuildEvent>copy /y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)Assets\AdventuresUnknown\Plugins\$(ProjectName).dll
+copy /y "$(TargetDir)$(ProjectName).pdb" "$(SolutionDir)Assets\AdventuresUnknown\Plugins\$(ProjectName).pdb</PostBuildEvent>
   </PropertyGroup>
 </Project>
